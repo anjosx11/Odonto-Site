@@ -1,4 +1,4 @@
-import { type CSSProperties, type FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import { type CSSProperties, type FormEvent, type PointerEvent, useCallback, useEffect, useRef, useState } from "react";
 
 const BASE = import.meta.env.BASE_URL;
 const asset = (path: string) => `${BASE}${path.replace(/^\//, "")}`;
@@ -28,32 +28,32 @@ const journey = [
 ];
 
 const heroImages = [
-  { src: "/assets/hero/1b.jpg", alt: "Dra. Verônica Assis sorrindo na VA Dental Clinic", position: "50% 28%" },
-  { src: "/assets/hero/2b.jpg", alt: "Sala de espera da VA Dental Clinic", position: "50% 52%" },
-  { src: "/assets/hero/3b.jpg", alt: "Cadeira e equipamentos do consultório odontológico", position: "50% 48%" },
-  { src: "/assets/hero/4b.jpg", alt: "Consultório da VA Dental Clinic", position: "50% 48%" },
-  { src: "/assets/hero/5b.jpg", alt: "Sala clínica preparada para atendimento", position: "50% 50%" },
-  { src: "/assets/hero/6b.jpg", alt: "Recepção da VA Dental Clinic", position: "50% 48%" },
+  { src: "/assets/hero/1b.jpg", webp: "/assets/hero/1b.webp", smallWebp: "/assets/hero/1b-360.webp", alt: "Dra. Verônica Assis sorrindo na VA Dental Clinic", width: 537, height: 659, desktopPosition: "50% 42%", mobilePosition: "50% 34%" },
+  { src: "/assets/hero/2b.jpg", webp: "/assets/hero/2b.webp", smallWebp: "/assets/hero/2b-360.webp", alt: "Sala de espera da VA Dental Clinic", width: 537, height: 659, desktopPosition: "50% 50%", mobilePosition: "50% 46%" },
+  { src: "/assets/hero/3b.jpg", webp: "/assets/hero/3b.webp", smallWebp: "/assets/hero/3b-360.webp", alt: "Cadeira e equipamentos do consultório odontológico", width: 537, height: 659, desktopPosition: "52% 50%", mobilePosition: "52% 44%" },
+  { src: "/assets/hero/4b.jpg", webp: "/assets/hero/4b.webp", smallWebp: "/assets/hero/4b-360.webp", alt: "Consultório da VA Dental Clinic", width: 537, height: 659, desktopPosition: "50% 48%", mobilePosition: "50% 44%" },
+  { src: "/assets/hero/5b.jpg", webp: "/assets/hero/5b.webp", smallWebp: "/assets/hero/5b-360.webp", alt: "Sala clínica preparada para atendimento", width: 537, height: 659, desktopPosition: "50% 48%", mobilePosition: "50% 44%" },
+  { src: "/assets/hero/6b.jpg", webp: "/assets/hero/6b.webp", smallWebp: "/assets/hero/6b-360.webp", alt: "Recepção da VA Dental Clinic", width: 537, height: 659, desktopPosition: "50% 50%", mobilePosition: "50% 46%" },
 ];
 
 const clinicImages = [
-  { src: "/assets/clinic/clinica1.jpg", alt: "Consultório azul e madeira da VA Dental Clinic", position: "50% 48%" },
-  { src: "/assets/clinic/clinica2.jpg", alt: "Consultório iluminado da VA Dental Clinic", position: "50% 46%" },
-  { src: "/assets/clinic/clinica3.jpg", alt: "Lavabo da VA Dental Clinic", position: "50% 50%" },
-  { src: "/assets/clinic/clinica4.jpg", alt: "Sala de atendimento odontológico da VA Dental Clinic", position: "50% 45%" },
+  { src: "/assets/clinic/clinica1.jpg", webp: "/assets/clinic/clinica1.webp", smallWebp: "/assets/clinic/clinica1-360.webp", alt: "Consultório azul e madeira da VA Dental Clinic", width: 585, height: 675, desktopPosition: "50% 48%", mobilePosition: "50% 48%" },
+  { src: "/assets/clinic/clinica2.jpg", webp: "/assets/clinic/clinica2.webp", smallWebp: "/assets/clinic/clinica2-360.webp", alt: "Consultório iluminado da VA Dental Clinic", width: 585, height: 675, desktopPosition: "50% 46%", mobilePosition: "50% 46%" },
+  { src: "/assets/clinic/clinica3.jpg", webp: "/assets/clinic/clinica3.webp", smallWebp: "/assets/clinic/clinica3-360.webp", alt: "Lavabo da VA Dental Clinic", width: 585, height: 675, desktopPosition: "50% 50%", mobilePosition: "50% 50%" },
+  { src: "/assets/clinic/clinica4.jpg", webp: "/assets/clinic/clinica4.webp", smallWebp: "/assets/clinic/clinica4-360.webp", alt: "Sala de atendimento odontológico da VA Dental Clinic", width: 585, height: 675, desktopPosition: "50% 45%", mobilePosition: "50% 45%" },
 ];
 
 const doctorImages = [
-  { src: "/assets/doctor/1.jpg", alt: "Dra. Verônica Assis atendendo uma paciente", position: "50% 36%" },
-  { src: "/assets/doctor/2.jpg", alt: "Dra. Verônica Assis apresentando alinhadores transparentes", position: "50% 25%" },
-  { src: "/assets/doctor/3.jpg", alt: "Retrato da Dra. Verônica Assis na clínica", position: "50% 24%" },
-  { src: "/assets/doctor/4.jpg", alt: "Dra. Verônica Assis preparando o consultório", position: "50% 35%" },
-  { src: "/assets/doctor/5.jpg", alt: "Dra. Verônica Assis em um ambiente de acolhimento", position: "50% 25%" },
+  { src: "/assets/doctor/1.jpg", webp: "/assets/doctor/1.webp", smallWebp: "/assets/doctor/1-360.webp", alt: "Dra. Verônica Assis atendendo uma paciente", width: 585, height: 675, desktopPosition: "50% 36%", mobilePosition: "50% 36%" },
+  { src: "/assets/doctor/2.jpg", webp: "/assets/doctor/2.webp", smallWebp: "/assets/doctor/2-360.webp", alt: "Dra. Verônica Assis apresentando alinhadores transparentes", width: 585, height: 675, desktopPosition: "50% 25%", mobilePosition: "50% 25%" },
+  { src: "/assets/doctor/3.jpg", webp: "/assets/doctor/3.webp", smallWebp: "/assets/doctor/3-360.webp", alt: "Retrato da Dra. Verônica Assis na clínica", width: 585, height: 675, desktopPosition: "50% 24%", mobilePosition: "50% 24%" },
+  { src: "/assets/doctor/4.jpg", webp: "/assets/doctor/4.webp", smallWebp: "/assets/doctor/4-360.webp", alt: "Dra. Verônica Assis preparando o consultório", width: 585, height: 675, desktopPosition: "50% 35%", mobilePosition: "50% 35%" },
+  { src: "/assets/doctor/5.jpg", webp: "/assets/doctor/5.webp", smallWebp: "/assets/doctor/5-360.webp", alt: "Dra. Verônica Assis em um ambiente de acolhimento", width: 585, height: 675, desktopPosition: "50% 25%", mobilePosition: "50% 25%" },
 ];
 
-type CarouselImage = { src: string; alt: string; position: string };
+type CarouselImage = { src: string; webp: string; smallWebp: string; alt: string; width: number; height: number; desktopPosition: string; mobilePosition: string };
 
-function useCarousel(images: readonly CarouselImage[], interval = 4800) {
+function useCarousel(images: readonly CarouselImage[], paused = false, interval = 4800) {
   const [index, setIndex] = useState(0);
   const [previous, setPrevious] = useState<number | null>(null);
 
@@ -75,7 +75,7 @@ function useCarousel(images: readonly CarouselImage[], interval = 4800) {
     let timer = 0;
     const start = () => {
       window.clearInterval(timer);
-      if (!media.matches && !document.hidden) timer = window.setInterval(() => show(index + 1), interval);
+      if (!paused && !media.matches && !document.hidden) timer = window.setInterval(() => show(index + 1), interval);
     };
     start();
     document.addEventListener("visibilitychange", start);
@@ -85,26 +85,52 @@ function useCarousel(images: readonly CarouselImage[], interval = 4800) {
       document.removeEventListener("visibilitychange", start);
       media.removeEventListener("change", start);
     };
-  }, [index, interval, show]);
+  }, [index, interval, paused, show]);
 
   return { index, previous, show };
 }
 
 function PhotoCarousel({ images, className = "", eager = false, label }: { images: readonly CarouselImage[]; className?: string; eager?: boolean; label: string }) {
-  const { index, previous, show } = useCarousel(images);
+  const [engaged, setEngaged] = useState(false);
+  const [interactionPause, setInteractionPause] = useState(false);
+  const paused = engaged || interactionPause;
+  const { index, previous, show } = useCarousel(images, paused);
+  const pointerStart = useRef<number | null>(null);
+  const resumeTimer = useRef<number>(0);
   const visible = previous === null ? [index] : [previous, index];
+
+  useEffect(() => () => window.clearTimeout(resumeTimer.current), []);
+
+  const interact = (nextIndex: number) => {
+    window.clearTimeout(resumeTimer.current);
+    setInteractionPause(true);
+    show(nextIndex);
+    resumeTimer.current = window.setTimeout(() => setInteractionPause(false), 9000);
+  };
+
+  const finishSwipe = (event: PointerEvent<HTMLDivElement>) => {
+    if (pointerStart.current === null) return;
+    const distance = event.clientX - pointerStart.current;
+    pointerStart.current = null;
+    if (Math.abs(distance) > 42) interact(index + (distance < 0 ? 1 : -1));
+  };
+
   return (
-    <div className={`photo-carousel ${className}`} role="region" aria-roledescription="carrossel" aria-label={label}>
+    <div className={`photo-carousel ${className}${paused ? " is-paused" : ""}`} role="region" aria-roledescription="carrossel" aria-label={label} onMouseEnter={() => setEngaged(true)} onMouseLeave={() => setEngaged(false)} onFocus={() => setEngaged(true)} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setEngaged(false); }} onPointerDown={(event) => { pointerStart.current = event.clientX; }} onPointerUp={finishSwipe} onPointerCancel={() => { pointerStart.current = null; }}>
       <div className="carousel-images">
         {visible.map((imageIndex) => {
           const image = images[imageIndex];
-          return <img key={imageIndex} className={imageIndex === index ? "is-current" : "is-leaving"} src={asset(image.src)} alt={imageIndex === index ? image.alt : ""} aria-hidden={imageIndex !== index} loading={eager && imageIndex === 0 ? "eager" : "lazy"} fetchPriority={eager && imageIndex === 0 ? "high" : "auto"} decoding="async" style={{ objectPosition: image.position }} />;
+          const style = { "--desktop-position": image.desktopPosition, "--mobile-position": image.mobilePosition } as CSSProperties;
+          return <picture key={imageIndex} className={imageIndex === index ? "is-current" : "is-leaving"} style={style} aria-hidden={imageIndex !== index}>
+            <source type="image/webp" srcSet={`${asset(image.smallWebp)} 360w, ${asset(image.webp)} ${image.width}w`} sizes="(max-width: 720px) 100vw, 585px" />
+            <img src={asset(image.src)} alt={imageIndex === index ? image.alt : ""} width={image.width} height={image.height} loading={eager && imageIndex === 0 ? "eager" : "lazy"} fetchPriority={eager && imageIndex === 0 ? "high" : "auto"} decoding="async" />
+          </picture>;
         })}
       </div>
       <div className="carousel-controls">
-        <button type="button" onClick={() => show(index - 1)} aria-label="Foto anterior">←</button>
-        <span aria-live="polite">{String(index + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}</span>
-        <button type="button" onClick={() => show(index + 1)} aria-label="Próxima foto">→</button>
+        <button type="button" onClick={() => interact(index - 1)} aria-label="Foto anterior">←</button>
+        <span aria-live="polite" aria-atomic="true">{String(index + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}</span>
+        <button type="button" onClick={() => interact(index + 1)} aria-label="Próxima foto">→</button>
       </div>
     </div>
   );
@@ -264,7 +290,6 @@ export default function App() {
         <section className="hero" id="inicio">
           <div className="hero-sticky">
             <PhotoCarousel images={heroImages} className="hero-carousel" eager label="Fotografias da VA Dental Clinic" />
-            <div className="hero-wash" />
             <div className="hero-copy">
               <p className="eyebrow"><span>VA Dental Clinic</span><span>Saúde &amp; estética</span></p>
               <h1><span>Seja bem-vindo(a)</span><em>ao meu universo.</em></h1>
@@ -328,7 +353,7 @@ export default function App() {
             <div className="journey-heading">
               <div className="section-label"><span>04</span><p>Sua jornada</p></div>
               <h2>Como funciona<br />o <em>atendimento</em></h2>
-              <div className="journey-photo"><img src={asset("/assets/hero/molde2.jpg")} alt="Consultórios e recepção da VA Dental Clinic" loading="lazy" /></div>
+              <div className="journey-photo"><picture><source type="image/webp" srcSet={`${asset("/assets/hero/molde2-360.webp")} 360w, ${asset("/assets/hero/molde2.webp")} 1479w`} sizes="(max-width: 720px) calc(100vw - 3rem), 48vw" /><img src={asset("/assets/hero/molde2.jpg")} alt="Consultórios e recepção da VA Dental Clinic" width="1479" height="661" loading="lazy" onError={(event) => { event.currentTarget.hidden = true; event.currentTarget.closest(".journey-photo")?.classList.add("has-image-error"); }} /></picture></div>
             </div>
             <div className="journey-steps">
               <div className="journey-line"><i /></div>
