@@ -1,0 +1,2388 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+:root{
+
+    --azul:#55637E;
+
+    --branco:#F9FAF5;
+
+    --texto:#333333;
+
+    --cinza:#eeeeee;
+
+}
+
+
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+
+body{
+
+    font-family:'Open Sans', Arial, sans-serif;
+
+    background:var(--branco);
+
+    color:var(--texto);
+
+    line-height:1.6;
+
+}
+
+
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+
+
+.container{
+
+    width:90%;
+
+    max-width:1200px;
+
+    margin:auto;
+
+}
+
+
+
+
+
+
+
+/* =========================
+   HEADER
+========================= */
+
+
+.header{
+
+    background:var(--branco);
+
+    padding:25px 0;
+
+}
+
+
+
+.header-flex{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:30px;
+
+}
+
+
+
+.logo img{
+
+    width:230px;
+
+}
+
+
+
+.telefone{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    color:var(--azul);
+
+}
+
+
+
+.telefone img{
+
+    width:35px;
+
+}
+
+
+
+.telefone strong{
+
+    display:block;
+
+    font-size:20px;
+
+}
+
+
+
+.telefone span{
+
+    font-size:14px;
+
+}
+
+
+
+
+
+
+
+/* =========================
+   MENU
+========================= */
+
+
+.menu{
+
+    background:var(--azul);
+
+}
+
+
+
+.menu ul{
+
+    list-style:none;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+.menu li a{
+
+    display:block;
+
+    padding:18px 30px;
+
+    color:white;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+
+
+.menu li a:hover{
+
+    background:rgba(255,255,255,.15);
+
+}
+
+
+
+
+
+
+
+/* =========================
+   SLIDESHOW PRINCIPAL
+========================= */
+
+
+.slideshow{
+
+    position:relative;
+
+    height:650px;
+
+    overflow:hidden;
+
+}
+
+
+
+.slide{
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:0;
+
+    transition:opacity 1.5s ease;
+
+}
+
+
+
+.slide.ativo{
+
+    opacity:1;
+
+}
+
+
+
+.slide img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+
+.slide-texto{
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    text-align:center;
+
+    color:white;
+
+    width:90%;
+
+    text-shadow:0 3px 8px rgba(0,0,0,.5);
+
+}
+
+
+
+.slide-texto h1{
+    margin-top: 400px;
+
+    font-family:'Ubuntu',sans-serif;
+
+    font-size:42px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.slide-texto h2{
+
+    font-size:28px;
+
+    font-weight:400;
+
+}
+
+
+
+
+
+
+
+/* =========================
+   SEGUNDO SLIDE
+========================= */
+
+
+.slideshow-secundario{
+
+    display:none;
+
+}
+
+
+/* =========================
+   SEÇÕES GERAIS
+========================= */
+
+
+.secao{
+
+    padding:90px 0;
+
+}
+
+
+
+.destaque{
+
+    background:white;
+
+}
+
+
+
+h2{
+
+    font-family:'Ubuntu',sans-serif;
+
+    color:var(--azul);
+
+    font-size:36px;
+
+    margin-bottom:25px;
+
+}
+
+
+
+p{
+
+    margin-bottom:18px;
+
+    font-size:16px;
+
+}
+
+
+
+
+
+
+
+/* =========================
+   BOTÕES
+========================= */
+
+
+.botao-premium{
+
+    display:inline-block;
+
+    background:var(--azul);
+
+    color:white;
+
+    padding:14px 35px;
+
+    border-radius:30px;
+
+    margin-top:20px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+
+.botao-premium:hover{
+
+    opacity:.85;
+
+    transform:translateY(-3px);
+
+}
+
+
+
+
+
+
+
+/* =========================
+   A CLÍNICA
+========================= */
+
+
+.grid-clinica{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:60px;
+
+    align-items:center;
+
+}
+
+
+
+
+
+.conteudo{
+
+    animation-delay:.2s;
+
+}
+
+
+
+
+
+.galeria-clinica{
+
+    position:relative;
+
+    height:450px;
+
+    overflow:hidden;
+
+    border-radius:15px;
+
+}
+
+
+
+.clinica-slide{
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:0;
+
+    transition:opacity 1.5s ease;
+
+}
+
+
+
+.clinica-slide.ativo{
+
+    opacity:1;
+
+}
+
+
+
+.clinica-slide img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+
+
+
+
+
+/* =========================
+   DOUTORA
+========================= */
+
+
+.grid-dentista{
+
+    display:grid;
+
+    grid-template-columns:420px 1fr;
+
+    gap:70px;
+
+    align-items:center;
+
+}
+
+
+
+
+
+.foto-doutora img{
+
+    width:100%;
+
+    border-radius:20px;
+
+}
+
+
+
+
+
+.texto-dentista p{
+
+    font-size:17px;
+
+}
+
+
+
+
+
+
+
+/* =========================
+   ESPECIALIDADES
+========================= */
+
+
+.titulo-secao{
+
+    text-align:center;
+
+    margin-bottom:50px;
+
+}
+
+
+
+
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+
+}
+
+
+
+
+
+.card{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+
+
+.card h3{
+
+    color:var(--azul);
+
+    font-family:'Ubuntu',sans-serif;
+
+    font-size:22px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+
+
+.centralizar{
+
+    text-align:center;
+
+    margin-top:40px;
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   ANIMAÇÕES
+========================= */
+
+
+.animar{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:all .8s ease;
+
+}
+
+
+
+.animar.mostrar{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+/* =========================
+   CONTATO
+========================= */
+
+
+.contato{
+
+    background:#ffffff;
+
+}
+
+
+
+.grid-contato{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:60px;
+
+    align-items:start;
+
+}
+
+
+
+
+
+
+.formulario{
+
+    background:var(--branco);
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+
+
+.formulario h2{
+
+    margin-bottom:30px;
+
+}
+
+
+
+
+
+.formulario label{
+
+    display:block;
+
+    margin-bottom:18px;
+
+    font-weight:600;
+
+    color:var(--azul);
+
+}
+
+
+
+.formulario input,
+
+.formulario textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-top:8px;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    font-family:'Open Sans',sans-serif;
+
+    font-size:15px;
+
+    background:white;
+
+}
+
+
+
+.formulario textarea{
+
+    height:130px;
+
+    resize:none;
+
+}
+
+
+
+.formulario button{
+
+    border:none;
+
+    cursor:pointer;
+
+}
+
+
+
+
+
+
+
+/* =========================
+   LOCALIZAÇÃO
+========================= */
+
+
+.localizacao{
+
+    padding:20px;
+
+}
+
+
+
+.localizacao h2{
+
+    margin-bottom:25px;
+
+}
+
+
+
+.mapa{
+
+    width:100%;
+
+    height:400px;
+
+    margin-top:30px;
+
+    overflow:hidden;
+
+    border-radius:15px;
+
+}
+
+
+
+.mapa iframe{
+
+    width:100%;
+
+    height:100%;
+
+    border:0;
+
+}
+
+
+
+
+
+
+
+/* =========================
+   FOOTER
+========================= */
+
+
+.footer{
+
+    background:var(--azul);
+
+    color:white;
+
+    padding:60px 0;
+
+    text-align:center;
+
+}
+
+
+
+.footer h3{
+
+    font-family:'Ubuntu',sans-serif;
+
+    font-size:28px;
+
+    margin-top:35px;
+
+}
+
+
+
+.footer p{
+
+    margin:15px 0;
+
+}
+
+
+
+.footer .botao-premium{
+
+    background:white;
+
+    color:var(--azul);
+
+}
+
+
+
+
+
+
+
+/* =========================
+   WHATSAPP FLUTUANTE
+========================= */
+
+
+.whatsapp-flutuante{
+
+    position:fixed;
+
+    right:25px;
+
+    bottom:25px;
+
+    width:60px;
+
+    height:60px;
+
+    background:#25D366;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:9999;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.3);
+
+    animation:pulsar 1.8s infinite;
+
+}
+
+
+
+.whatsapp-flutuante img{
+
+    width:38px;
+
+}
+
+
+
+@keyframes pulsar{
+
+
+0%{
+
+transform:scale(1);
+
+}
+
+
+50%{
+
+transform:scale(1.12);
+
+}
+
+
+100%{
+
+transform:scale(1);
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================
+   TABLET
+========================= */
+
+
+@media(max-width:900px){
+
+
+
+.header-flex{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+
+
+.menu ul{
+
+    flex-direction:column;
+
+}
+
+
+
+.menu li{
+
+    width:100%;
+
+    text-align:center;
+
+}
+
+
+
+.slideshow{
+
+    height:450px;
+
+}
+
+
+
+.slide-texto h1{
+
+    font-size:30px;
+
+}
+
+
+
+.slide-texto h2{
+
+    font-size:20px;
+
+}
+
+
+
+.grid-clinica,
+
+.grid-dentista,
+
+.grid-contato{
+
+    grid-template-columns:1fr;
+
+}
+
+
+
+.grid-dentista{
+
+    text-align:center;
+
+}
+
+
+
+.foto-doutora{
+
+    max-width:350px;
+
+    margin:auto;
+
+}
+
+
+
+.galeria-clinica{
+
+    height:350px;
+
+}
+
+
+
+.cards{
+
+    grid-template-columns:1fr;
+
+}
+
+
+
+h2{
+
+    font-size:30px;
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================
+   CELULAR
+========================= */
+
+
+@media(max-width:600px){
+
+
+
+.container{
+
+    width:92%;
+
+}
+
+
+
+.header{
+
+    padding:20px 0;
+
+}
+
+
+
+.logo img{
+
+    width:190px;
+
+}
+
+
+
+.telefone strong{
+
+    font-size:17px;
+
+}
+
+
+
+.slideshow{
+
+    height:350px;
+
+}
+
+
+
+.slide-texto h1{
+
+    font-size:24px;
+
+}
+
+
+
+.slide-texto h2{
+
+    font-size:17px;
+
+}
+
+
+
+.secao{
+
+    padding:60px 0;
+
+}
+
+
+
+.formulario{
+
+    padding:25px;
+
+}
+
+
+
+.mapa{
+
+    height:300px;
+
+}
+
+
+
+.whatsapp-flutuante{
+
+    width:55px;
+
+    height:55px;
+
+    right:18px;
+
+    bottom:18px;
+
+}
+
+
+
+}
+
+
+/* Baixar texto do slideshow principal */
+.posicao {
+    top: auto !important;
+    bottom: 60px !important;
+}
+
+
+/* Ajuste para celular */
+@media (max-width: 768px) {
+
+    .posicao {
+        bottom: 35px !important;
+    }
+
+}
+
+
+.posicao h4:last-child {
+    color: #ffffff !important;
+}
+
+
+/* HERO */
+.slide-texto h1{
+    color:#fff !important;
+}
+
+.slide-texto h2{
+    color:#fff !important;
+}
+
+
+/* =========================
+   BOTÃO VOLTAR AO TOPO
+========================= */
+
+#btnTopo{
+
+    position:fixed;
+
+    left:25px;
+
+    bottom:25px;
+
+    width:58px;
+
+    height:58px;
+
+    border-radius:50%;
+
+    background:#55637E;
+
+    color:#F9FAF5;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transform:translateY(20px);
+
+    transition:.35s;
+
+    z-index:9999;
+
+}
+
+#btnTopo:hover{
+
+    background:#687894;
+
+    transform:translateY(-4px);
+
+}
+
+#btnTopo.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:translateY(0);
+
+}
+
+@media(max-width:768px){
+
+#btnTopo{
+
+left:15px;
+
+bottom:15px;
+
+width:52px;
+
+height:52px;
+
+font-size:24px;
+
+}
+
+}
+
+
+/* =========================
+   WHATSAPP PREMIUM
+========================= */
+
+.whatsapp-flutuante{
+
+    position:fixed;
+
+    right:25px;
+
+    bottom:25px;
+
+    width:68px;
+
+    height:68px;
+
+    border-radius:50%;
+
+    background:#25D366;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    box-shadow:
+    0 12px 30px rgba(0,0,0,.25),
+    0 0 0 8px rgba(37,211,102,.12);
+
+    transition:.35s;
+
+    z-index:9999;
+
+    animation:whatsPulse 2.2s infinite;
+
+}
+
+.whatsapp-flutuante img{
+
+    width:38px;
+
+    transition:.35s;
+
+}
+
+.whatsapp-flutuante:hover{
+
+    transform:translateY(-6px) scale(1.08);
+
+    box-shadow:
+    0 20px 40px rgba(0,0,0,.30),
+    0 0 0 12px rgba(37,211,102,.18);
+
+}
+
+.whatsapp-flutuante:hover img{
+
+    transform:rotate(12deg);
+
+}
+
+@keyframes whatsPulse{
+
+0%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.08);
+
+}
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.whatsapp-flutuante{
+
+width:60px;
+
+height:60px;
+
+right:15px;
+
+bottom:15px;
+
+}
+
+.whatsapp-flutuante img{
+
+width:34px;
+
+}
+
+}
+
+
+
+
+/* Desktop */
+.slideshow-mobile{
+    display:none;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .slideshow{
+        display:none;
+    }
+
+    .slideshow-mobile{
+
+        display:block;
+
+        position:relative;
+
+        width:100%;
+
+        height:100vh;
+
+        min-height:650px;
+
+        overflow:hidden;
+
+        background:#000;
+
+    }
+
+    .slide-mobile{
+
+        position:absolute;
+
+        inset:0;
+
+        opacity:0;
+
+        transition:opacity 1.2s;
+
+    }
+
+    .slide-mobile.ativo{
+
+        opacity:1;
+
+    }
+
+    .slide-mobile img{
+
+        width:100%;
+
+        height:100%;
+
+        object-fit:contain;
+
+        background:#000;
+
+    }
+
+}
+
+
+/* =====================================================
+   HERO DESKTOP
+===================================================== */
+
+.desktop-slide{
+    position:relative;
+    width:100%;
+    height:650px;
+    overflow:hidden;
+    display:block;
+    background:#000;
+}
+
+.desktop-slide .slide{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    transition:opacity 1.5s ease-in-out;
+}
+
+.desktop-slide .slide.ativo{
+    opacity:1;
+    z-index:2;
+}
+
+.desktop-slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.slide-texto{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:70px;
+
+    transform:translateX(-50%);
+
+    width:90%;
+
+    text-align:center;
+
+    z-index:20;
+
+    color:#fff;
+
+    text-shadow:0 4px 12px rgba(0,0,0,.55);
+
+}
+
+.slide-texto h1{
+
+    color:#fff;
+
+    font-family:'Ubuntu',sans-serif;
+
+    font-size:46px;
+
+    margin-bottom:12px;
+
+}
+
+.slide-texto h2{
+
+    color:#fff;
+
+    font-family:'Ubuntu',sans-serif;
+
+    font-size:30px;
+
+    font-weight:400;
+
+}
+
+
+
+/* =====================================================
+   HERO MOBILE
+===================================================== */
+
+.slideshow-mobile{
+
+    display:none;
+
+    position:relative;
+
+    width:100%;
+
+    overflow:hidden;
+
+    background:#000;
+
+}
+
+.slide-mobile{
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:0;
+
+    transition:opacity 1.2s ease;
+
+}
+
+.slide-mobile.ativo{
+
+    opacity:1;
+
+    z-index:2;
+
+}
+
+.slide-mobile img{
+
+    width:100%;
+
+    display:block;
+
+    height:auto;
+
+}
+
+.texto-mobile{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:35px;
+
+    transform:translateX(-50%);
+
+    width:92%;
+
+    text-align:center;
+
+    z-index:20;
+
+    text-shadow:0 4px 12px rgba(0,0,0,.65);
+
+}
+
+.texto-mobile h1{
+
+    color:#fff;
+
+    font-size:30px;
+
+    font-family:'Ubuntu',sans-serif;
+
+    margin-bottom:10px;
+
+}
+
+.texto-mobile h2{
+
+    color:#fff;
+
+    font-size:21px;
+
+    font-weight:400;
+
+}
+
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media (max-width:768px){
+
+    .desktop-slide{
+
+        display:none;
+
+    }
+
+    .slideshow-mobile{
+
+        display:block;
+
+    }
+
+}
+
+
+
+@media (min-width:769px){
+
+    .slideshow-mobile{
+
+        display:none;
+
+    }
+
+}
+
+
+
+
+
+/* ==========================================================
+   HERO NOVO - DESKTOP
+========================================================== */
+
+#hero-desktop{
+
+    position:relative;
+
+    width:100%;
+
+    height:650px;
+
+    overflow:hidden;
+
+    background:#000;
+
+}
+
+.hero-slide{
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:0;
+
+    transition:opacity 1.8s ease-in-out;
+
+    z-index:1;
+
+}
+
+.hero-slide.active{
+
+    opacity:1;
+
+    z-index:2;
+
+}
+
+.hero-slide img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+/* ==========================================================
+   HERO MOBILE
+========================================================== */
+
+#hero-mobile{
+
+    position:relative;
+
+    display:none;
+
+    width:100%;
+
+    overflow:hidden;
+
+    background:#000;
+
+}
+
+.mobile-slide{
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:0;
+
+    transition:opacity 1.8s ease-in-out;
+
+    z-index:1;
+
+}
+
+.mobile-slide.active{
+
+    opacity:1;
+
+    z-index:2;
+
+}
+
+.mobile-slide img{
+
+    width:100%;
+
+    display:block;
+
+    height:auto;
+
+}
+
+/* altura baseada na primeira imagem */
+
+#hero-mobile::before{
+
+    content:"";
+
+    display:block;
+
+    padding-top:150%;
+
+}
+
+#hero-mobile .mobile-slide{
+
+    position:absolute;
+
+    inset:0;
+
+}
+
+/* ==========================================================
+   OVERLAY
+========================================================== */
+
+.hero-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+
+        to top,
+
+        rgba(0,0,0,.40),
+
+        rgba(0,0,0,.05)
+
+    );
+
+    z-index:5;
+
+}
+
+/* ==========================================================
+   TEXTO
+========================================================== */
+
+.hero-caption{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:65px;
+
+    transform:translateX(-50%);
+
+    width:min(1200px,92%);
+
+    text-align:center;
+
+    z-index:20;
+
+}
+
+.hero-caption h1{
+
+    color:#fff;
+
+    font-family:'Ubuntu',sans-serif;
+
+    font-size:46px;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+
+    text-shadow:0 4px 20px rgba(0,0,0,.45);
+
+}
+
+.hero-caption h2{
+
+    color:#fff;
+
+    font-family:'Ubuntu',sans-serif;
+
+    font-size:28px;
+
+    font-weight:400;
+
+    text-shadow:0 4px 20px rgba(0,0,0,.45);
+
+}
+
+/* ==========================================================
+   RESPONSIVO
+========================================================== */
+
+@media(max-width:900px){
+
+    #hero-desktop{
+
+        display:none;
+
+    }
+
+    #hero-mobile{
+
+        display:block;
+
+    }
+
+    .hero-caption{
+
+        bottom:35px;
+
+        width:90%;
+
+    }
+
+    .hero-caption h1{
+
+        font-size:28px;
+
+    }
+
+    .hero-caption h2{
+
+        font-size:18px;
+
+    }
+
+}
+
+@media(min-width:901px){
+
+    #hero-mobile{
+
+        display:none;
+
+    }
+
+}
+
+
+/* ==========================================================
+   CORREÇÃO HERO MOBILE - REMOVER ESPAÇO PRETO
+========================================================== */
+
+@media(max-width:768px){
+
+
+    #hero-mobile{
+
+        position:relative;
+
+        display:block;
+
+        width:100%;
+
+        height:auto;
+
+        overflow:hidden;
+
+        background:#000;
+
+    }
+
+
+
+    #hero-mobile::before{
+
+        display:none;
+
+    }
+
+
+
+    #hero-mobile .mobile-slide{
+
+        position:absolute;
+
+        inset:0;
+
+        opacity:0;
+
+        transition:opacity 1.8s ease-in-out;
+
+        z-index:1;
+
+    }
+
+
+
+    #hero-mobile .mobile-slide.active{
+
+        opacity:1;
+
+        position:relative;
+
+        z-index:2;
+
+    }
+
+
+
+    #hero-mobile .mobile-slide img{
+
+        width:100%;
+
+        height:auto;
+
+        display:block;
+
+        object-fit:contain;
+
+    }
+
+
+
+    #hero-mobile .hero-overlay{
+
+        position:absolute;
+
+        inset:0;
+
+        z-index:5;
+
+    }
+
+
+
+    #hero-mobile .hero-caption{
+
+        position:absolute;
+
+        bottom:35px;
+
+        left:50%;
+
+        transform:translateX(-50%);
+
+        width:90%;
+
+        z-index:20;
+
+    }
+
+
+}
+
+
+/* ==========================================================
+   SLIDESHOW FOTO DOUTORA
+========================================================== */
+
+
+.foto-doutora{
+
+    position:relative;
+
+    height:620px;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+}
+
+
+
+.doutora-slide{
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:0;
+
+    transition:opacity 1.5s ease-in-out;
+
+}
+
+
+
+.doutora-slide.ativo{
+
+    opacity:1;
+
+}
+
+
+
+.doutora-slide img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    object-position:center;
+
+    border-radius:20px;
+
+}
+
+
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+
+    .foto-doutora{
+
+        height:520px;
+
+        max-width:350px;
+
+        margin:auto;
+
+    }
+
+
+}
+
+
+/* ==========================================================
+   CORREÇÃO SLIDESHOW DOUTORA MOBILE
+========================================================== */
+
+
+.foto-doutora{
+
+    position:relative;
+
+    width:100%;
+
+    height:620px;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+}
+
+
+
+.doutora-slide{
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    opacity:0;
+
+    transition:opacity 1.5s ease-in-out;
+
+}
+
+
+
+.doutora-slide.ativo{
+
+    opacity:1;
+
+    z-index:2;
+
+}
+
+
+
+.doutora-slide img{
+
+    width:100%;
+
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+    object-position:center;
+
+    border-radius:20px;
+
+}
+
+
+
+@media(max-width:900px){
+
+
+    .foto-doutora{
+
+        display:block;
+
+        width:100%;
+
+        max-width:350px;
+
+        height:520px;
+
+        margin:0 auto 40px;
+
+    }
+
+
+    .doutora-slide{
+
+        display:block;
+
+    }
+
+
+    .doutora-slide img{
+
+        width:100%;
+
+        height:100%;
+
+        object-fit:cover;
+
+    }
+
+
+}
+
+
+
+/* ==========================================================
+   AJUSTE TEXTO DENTISTA MOBILE
+   Mantém padrão alinhado à esquerda
+========================================================== */
+
+@media(max-width:900px){
+
+
+    .grid-dentista{
+
+        text-align:left;
+
+    }
+
+
+    .foto-doutora{
+
+        margin-left:auto;
+
+        margin-right:auto;
+
+    }
+
+
+    .texto-dentista{
+
+        text-align:left;
+
+    }
+
+
+}
+
+
+/* =====================================
+   CORREÇÃO DO SLIDESHOW DA CLÍNICA
+===================================== */
+
+.galeria-clinica{
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.18);
+}
+
+.clinica-slide{
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .8s ease;
+}
+
+.clinica-slide.ativo{
+    opacity: 1;
+}
+
+.clinica-slide img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+    .galeria-clinica{
+        height: 600px;
+    }
+
+    .clinica-slide img{
+        object-position: center top;
+    }
+
+}
+
+
+
+/* =====================================
+   AJUSTE DO SLIDESHOW DA DOUTORA
+===================================== */
+
+.foto-doutora{
+    width: 100%;
+}
+
+.foto-doutora img{
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 18px;
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+    .foto-doutora{
+        max-width: 460px;
+        width: 100%;
+        margin: 0 auto 35px;
+    }
+
+    .doutora-slide img{
+        width: 100%;
+        height: 600px;
+        object-fit: cover;
+        object-position: center top;
+        border-radius: 18px;
+    }
+
+}
+
+
+/* =====================================
+   BOTÃO VOLTAR AO TOPO
+===================================== */
+
+#btnTopo{
+    background: #2f2f2f;
+    color: #fff;
+    border: 2px solid #444;
+    box-shadow: 0 8px 25px rgba(0,0,0,.25);
+    transition: all .3s ease;
+}
+
+#btnTopo:hover{
+    background: #000;
+    border-color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.35);
+}
+
+.clinica-separador{
+    margin:60px 0;
+    border-top:1px solid #ddd;
+}
+
+
+
+.formulario{
+    position: sticky;
+    top: 30px;
+    align-self: flex-start;
+}
+
+
+/* ==========================================
+   REMOVE O STICKY NO MOBILE
+========================================== */
+
+@media screen and (max-width: 768px){
+
+    .formulario{
+        position: relative !important;
+        top: unset !important;
+        left: unset !important;
+        right: unset !important;
+        bottom: unset !important;
+    }
+
+}

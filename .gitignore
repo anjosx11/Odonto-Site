@@ -1,0 +1,10 @@
+node_modules
+dist
+*.local
+*.tsbuildinfo
+.DS_Store
+qa/
+qa-2/
+.edge-qa/
+.edge-qa-2/
+.edge-doctor/
