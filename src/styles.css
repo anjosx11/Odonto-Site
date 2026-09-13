@@ -294,3 +294,185 @@ footer nav { display: flex; gap: 2rem; font-size: .67rem; text-transform: upperc
   .journey-sticky { position: relative; height: auto; }
   .journey-steps article { opacity: 1; transform: none; }
 }
+
+/* Corrective pass: faithful content, compact flow and real-photo carousels */
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.wordmark { display: block; width: clamp(7.8rem, 9vw, 8.8rem); overflow: hidden; background: #f8f7f1; }
+.wordmark img { width: 100%; height: auto; aspect-ratio: 400 / 225; object-fit: cover; }
+.header { height: 6.3rem; }
+.is-scrolled .header { height: 4.8rem; }
+
+.photo-carousel, .carousel-images { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.carousel-images img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.carousel-images img.is-current { z-index: 2; opacity: 1; animation: carousel-in .9s ease both; }
+.carousel-images img.is-leaving { z-index: 1; opacity: 0; transition: opacity .9s ease; }
+.carousel-controls { position: absolute; z-index: 4; right: 1.25rem; bottom: 1.25rem; display: flex; align-items: center; gap: .8rem; padding: .55rem .7rem; color: white; background: rgba(9, 23, 45, .66); backdrop-filter: blur(9px); }
+.carousel-controls button { display: grid; place-items: center; width: 2rem; height: 2rem; padding: 0; border: 1px solid rgba(255,255,255,.35); color: white; background: transparent; border-radius: 50%; cursor: pointer; }
+.carousel-controls button:hover { background: rgba(255,255,255,.15); }
+.carousel-controls span { min-width: 3.4rem; text-align: center; font-size: .57rem; letter-spacing: .15em; }
+@keyframes carousel-in { from { opacity: 0; transform: scale(1.012); } to { opacity: 1; transform: scale(1); } }
+
+.hero { height: 145vh; min-height: 48rem; }
+.hero-sticky { min-height: 40rem; }
+.hero-carousel { position: absolute; inset: 0; z-index: -3; }
+.hero-carousel .carousel-controls { right: clamp(1.5rem, 4vw, 5rem); bottom: 2rem; }
+.hero-wash { background: linear-gradient(90deg, rgba(7, 20, 40, .7) 0%, rgba(8, 22, 43, .38) 51%, rgba(9, 23, 45, .08) 82%), linear-gradient(0deg, rgba(7, 18, 37, .32), transparent 55%); }
+.hero-copy { left: clamp(1.5rem, 6.5vw, 7.5rem); width: min(50rem, 58vw); transform: translateY(calc(-46% - var(--hero) * 4rem)); opacity: calc(1 - var(--hero) * 1.25); }
+.hero h1 { font-size: clamp(3.6rem, 6.5vw, 7.4rem); line-height: .93; }
+.hero h1 em { margin: .12em 0 0 clamp(1rem, 4vw, 4.5rem); }
+.hero-intro { margin: 2rem 0 0 clamp(1rem, 7vw, 7rem); color: white; font-size: clamp(1rem, 1.25vw, 1.22rem); font-weight: 400; }
+.hero-cta { display: inline-flex; align-items: center; gap: 1rem; margin: 2rem 0 0 clamp(1rem, 7vw, 7rem); padding: .8rem 1rem; color: var(--navy); background: var(--ivory); font-size: .64rem; text-transform: uppercase; letter-spacing: .14em; }
+.hero-cta svg { transition: transform .3s; }
+.hero-cta:hover svg { transform: translateX(.35rem); }
+.tooth-stage { top: 50%; left: 78%; width: clamp(10rem, 17vw, 15rem); opacity: calc(1 - var(--hero) * 1.45); transform: translate(-50%, -50%) translateY(calc((1 - var(--hero)) * 2rem)); }
+.tooth-object { transform: rotateY(calc(var(--hero) * 210deg - 24deg)) rotateX(calc(var(--hero) * -10deg + 5deg)) scale(calc(.88 + var(--hero) * .06)); filter: drop-shadow(0 1.6rem 2.3rem rgba(0,0,0,.3)); will-change: transform; }
+.tooth-orbit { inset: 3%; }
+.hero-index { bottom: 2rem; right: auto; width: min(24rem, 35vw); }
+
+.manifesto { padding: clamp(6rem, 9vw, 9rem) clamp(1.5rem, 8vw, 9rem); }
+.clinic-copy { display: grid; grid-template-columns: minmax(18rem, .82fr) minmax(22rem, 1fr); gap: clamp(3rem, 9vw, 10rem); max-width: 77rem; margin: clamp(3.5rem, 6vw, 6rem) 0 0 auto; }
+.clinic-copy h2 { margin: 0; color: var(--navy); font: 400 clamp(2.8rem, 5vw, 5.6rem)/1.02 "Italiana", serif; letter-spacing: -.04em; }
+.clinic-copy > div { color: #34435a; font-size: 1rem; line-height: 1.75; }
+.clinic-copy p { margin: 0 0 1.3rem; }
+.clinic-copy p:first-child { color: var(--navy); font-weight: 500; }
+.manifesto-foot { margin-top: clamp(3rem, 5vw, 5rem); }
+
+.clinic-gallery { padding: clamp(5rem, 8vw, 8rem) clamp(1.5rem, 6vw, 7rem); }
+.gallery-lead { align-items: end; margin-bottom: 3.5rem; }
+.gallery-lead h2 { font-size: clamp(2.8rem, 4.8vw, 5.5rem); }
+.clinic-carousel { height: min(68vw, 43rem); min-height: 30rem; background: var(--navy-deep); }
+.clinic-carousel .carousel-images img { object-fit: contain; }
+
+.doctor { grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); min-height: 0; }
+.doctor-carousel { min-height: 48rem; background: #e9e5dc; }
+.doctor-carousel .carousel-controls { left: 1.5rem; right: auto; }
+.doctor-copy { padding: clamp(5rem, 7vw, 8rem); }
+.doctor-copy h2 { margin-top: 3.5rem; font-size: clamp(3rem, 5vw, 5.4rem); color: var(--navy); }
+.doctor-text { grid-template-columns: 1fr; gap: 1rem; margin: 2.7rem 0 3.2rem; color: #34435a; font-size: .94rem; line-height: 1.68; }
+.doctor-text p:last-child { grid-column: auto; margin-top: .5rem; color: var(--navy); font: 400 1rem/1.68 "DM Sans", sans-serif; }
+
+.specialties { padding-block: clamp(6rem, 9vw, 9rem); }
+.specialties-heading { margin-bottom: 4rem; }
+.specialties h2 { font-size: clamp(2.8rem, 5vw, 5.6rem); }
+.specialty-panels { display: grid; grid-template-columns: 1fr 1fr; height: auto; border: 1px solid rgba(255,255,255,.22); }
+.specialty-panels button, .specialty-panels button.is-active { display: grid; grid-template-columns: 3.5rem 1fr auto; align-items: start; min-height: 12rem; padding: 1.6rem; border: 0; border-right: 1px solid rgba(255,255,255,.22); border-bottom: 1px solid rgba(255,255,255,.22); background: transparent; overflow: visible; transition: background .35s; }
+.specialty-panels button:nth-child(even) { border-right: 0; }
+.specialty-panels button:nth-last-child(-n+2) { border-bottom: 0; }
+.specialty-panels button.is-active { background: #203759; }
+.specialty-content { position: static; min-width: 0; }
+.specialty-content strong { width: auto; max-width: none; color: white; font-size: clamp(1.55rem, 2.2vw, 2.5rem); overflow-wrap: anywhere; }
+.specialty-content p { max-width: 30rem; margin: 1rem 0 0; color: #d6dce5; opacity: 1; transform: none; }
+.specialty-content i { display: none; }
+.specialty-panels button > svg { position: static; width: 1.6rem; opacity: .65; }
+.specialty-panels button.is-active > svg { opacity: 1; transform: translateX(.2rem); }
+.specialties-note { color: #c1cad6; }
+
+.journey { height: auto; min-height: 0; }
+.journey-sticky { position: relative; top: auto; height: auto; min-height: 0; padding: clamp(6rem, 9vw, 9rem) clamp(1.5rem, 7vw, 8rem); overflow: visible; }
+.journey-heading h2 { margin-top: 3.5rem; color: var(--navy); font-size: clamp(2.8rem, 4.8vw, 5.4rem); }
+.journey-photo { position: relative; inset: auto; height: clamp(16rem, 27vw, 25rem); margin: 3rem 0 0; clip-path: inset(calc((1 - var(--journey)) * 45%) 0 0); }
+.journey-photo img { object-fit: cover; }
+.journey-steps article { padding: 1.45rem 0; opacity: .7; transform: translateX(.35rem); }
+.journey-steps article.is-active { opacity: 1; }
+.journey-steps p { color: #3f4f65; font-size: .9rem; }
+
+.contact { padding-block: clamp(6rem, 9vw, 9rem); }
+.contact-intro h2 { color: var(--navy); font-size: clamp(2.9rem, 5vw, 5.5rem); }
+.contact-intro > p { color: #3f4f65; }
+.contact label span { color: #52627a; }
+.contact input::placeholder, .contact textarea::placeholder { color: #68758a; opacity: 1; }
+.whatsapp-pill { right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom)); }
+.whatsapp-pill.is-hidden { opacity: 0; transform: translateY(1rem); pointer-events: none; }
+
+@media (max-width: 1050px) {
+  .header { height: 5rem; }
+  .is-scrolled .header { height: 4.6rem; }
+  .wordmark { width: 7.5rem; }
+  .hero-copy { width: min(46rem, 67vw); }
+  .tooth-stage { left: 81%; width: 11.5rem; }
+  .doctor-copy { padding: 5rem 3.5rem; }
+  .specialty-panels { display: grid; height: auto; }
+  .specialty-panels button, .specialty-panels button.is-active { min-height: 13rem; }
+}
+
+@media (max-width: 900px) {
+  .clinic-copy, .doctor, .contact, .journey-sticky { grid-template-columns: 1fr; }
+  .clinic-copy { gap: 2.5rem; }
+  .doctor-carousel { height: 42rem; min-height: 0; }
+  .doctor-copy { padding: 5.5rem clamp(2rem, 8vw, 5rem); }
+  .journey-heading { display: grid; grid-template-columns: 1fr 1fr; column-gap: 3rem; }
+  .journey-heading .section-label { grid-column: 1 / 3; }
+  .journey-heading h2 { grid-column: 1; }
+  .journey-photo { grid-column: 2; align-self: end; height: 22rem; }
+  .journey-steps { margin-top: 3rem; }
+  .contact { gap: 4rem; }
+}
+
+@media (max-width: 720px) {
+  .header, .is-scrolled .header { height: 4.4rem; padding-inline: 1rem; }
+  .wordmark { width: 6.8rem; }
+  .menu-toggle { width: 2.4rem; height: 2.4rem; }
+  .hero { height: 100svh; min-height: 40rem; }
+  .hero-sticky { position: relative; height: 100%; min-height: inherit; }
+  .hero-wash { background: linear-gradient(0deg, rgba(7,18,37,.78) 0%, rgba(8,21,42,.28) 69%, rgba(8,21,42,.08)); }
+  .hero-copy { left: 1.25rem; bottom: 6.5rem; width: calc(100% - 2.5rem); transform: none; opacity: 1; }
+  .hero h1 { max-width: 22rem; font-size: clamp(3rem, 13vw, 4.25rem); line-height: .96; }
+  .hero h1 em { margin-left: 0; }
+  .hero-intro { margin: 1.1rem 0 0; font-size: .95rem; }
+  .hero-cta { margin: 1.25rem 0 0; }
+  .hero .tooth-stage { top: 27%; left: auto; right: 1.5rem; width: clamp(6rem, 24vw, 7.5rem); transform: none; opacity: .92; overflow: visible; }
+  .tooth-object { transform: rotateY(-18deg) rotateX(4deg); }
+  .tooth-orbit { inset: 0; }
+  .hero-index { display: none; }
+  .hero .hero-carousel .carousel-controls { left: auto; right: 1rem; bottom: 1rem; }
+  .mobile-menu { padding-top: 5.6rem; }
+
+  .manifesto { padding-block: 5.5rem; }
+  .clinic-copy { grid-template-columns: 1fr; gap: 2rem; margin-top: 3rem; }
+  .clinic-copy h2 { font-size: 3.15rem; }
+  .clinic-copy > div { font-size: .94rem; }
+  .manifesto-foot { gap: 2rem; }
+
+  .clinic-gallery { padding-block: 5rem; }
+  .gallery-lead { margin-bottom: 2.5rem; }
+  .gallery-lead h2 { font-size: 3rem; }
+  .clinic-carousel { height: 31rem; min-height: 0; margin: 0; }
+
+  .doctor { grid-template-columns: 1fr; }
+  .doctor-carousel { min-height: 0; height: 34rem; }
+  .doctor-copy { padding: 4.8rem 1.5rem 5.5rem; }
+  .doctor-copy h2 { margin-top: 2.5rem; font-size: 3.2rem; }
+  .doctor-text { margin-block: 2rem 2.7rem; }
+
+  .specialties { padding-block: 5.5rem; }
+  .specialties-heading { margin-bottom: 3rem; }
+  .specialties h2 { font-size: 3rem; }
+  .specialty-panels { grid-template-columns: 1fr; border-bottom: 0; }
+  .specialty-panels button, .specialty-panels button.is-active { display: grid; grid-template-columns: 2.6rem 1fr 1.4rem; min-height: 0; padding: 1.3rem 1rem; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.22); }
+  .specialty-panels button:nth-last-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.22); }
+  .specialty-content strong { font-size: 1.5rem; line-height: 1.16; }
+  .specialty-content p { max-height: 0; margin: 0; opacity: 0; overflow: hidden; transition: max-height .45s ease, margin .35s ease, opacity .3s; }
+  .specialty-panels button.is-active .specialty-content p { max-height: 12rem; margin-top: 1rem; opacity: 1; }
+  .specialty-content i { display: block; position: absolute; right: 1rem; top: 1rem; opacity: 1; color: #d6dce5; font: 1.5rem/1 "DM Sans", sans-serif; }
+  .specialty-panels button > svg { display: none; }
+  .specialties-note { margin-top: 2rem; }
+
+  .journey-sticky { display: block; padding-block: 5.5rem; }
+  .journey-heading { display: block; }
+  .journey-heading h2 { margin-top: 2.5rem; font-size: 3rem; }
+  .journey-photo { height: 18rem; margin-top: 2.5rem; clip-path: none; }
+  .journey-steps { margin-top: 2.2rem; }
+  .journey-steps article { opacity: .82; }
+  .contact { padding-block: 5.5rem; gap: 3.5rem; }
+  .contact-intro h2 { margin-top: 2.5rem; font-size: 3.1rem; }
+  .locations article { padding: 3.5rem 1.5rem; }
+  .whatsapp-pill { right: max(.7rem, env(safe-area-inset-right)); bottom: max(.7rem, env(safe-area-inset-bottom)); padding: .5rem; }
+  .whatsapp-pill i { width: 2.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero { height: 100vh; }
+  .carousel-images img.is-current { animation: none; }
+  .carousel-images img.is-leaving { display: none; }
+  .tooth-object { transform: rotateY(-18deg) rotateX(4deg); }
+}
