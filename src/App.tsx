@@ -2,7 +2,14 @@ import { type CSSProperties, type FormEvent, type PointerEvent, useCallback, use
 
 const BASE = import.meta.env.BASE_URL;
 const asset = (path: string) => `${BASE}${path.replace(/^\//, "")}`;
-const WHATSAPP = "https://api.whatsapp.com/send?phone=5511968825299";
+const OFFICIAL_WHATSAPP = "5511968825299";
+const APPOINTMENT_MESSAGE = "Olá, gostaria de agendar uma consulta na VA Dental Clinic.";
+const whatsappUrl = (message: string) => {
+  const url = new URL("https://api.whatsapp.com/send");
+  url.searchParams.set("phone", OFFICIAL_WHATSAPP);
+  url.searchParams.set("text", message);
+  return url.toString();
+};
 
 const nav = [
   ["A clínica", "clinica"],
@@ -260,10 +267,22 @@ export default function App() {
     const form = event.currentTarget;
     if (!form.reportValidity()) return;
     const data = new FormData(form);
-    const name = String(data.get("name") ?? "").trim();
-    const phone = String(data.get("phone") ?? "").trim();
-    const email = String(data.get("email") ?? "").trim();
-    const contactMessage = String(data.get("message") ?? "").trim();
+    const field = (name: string) => {
+      const value = data.get(name);
+      return typeof value === "string" ? value.trim() : "";
+    };
+    const name = field("name");
+    const phone = field("phone");
+    const email = field("email");
+    const contactMessage = field("message");
+    const phoneInput = form.elements.namedItem("phone") as HTMLInputElement | null;
+    const phoneDigits = phone.replace(/\D/g, "");
+    if (phoneInput && (phoneDigits.length < 10 || phoneDigits.length > 13)) {
+      phoneInput.setCustomValidity("Informe um WhatsApp válido, com DDD.");
+      phoneInput.reportValidity();
+      return;
+    }
+    phoneInput?.setCustomValidity("");
     if (!name || !phone || !email || !contactMessage) return;
     const message = [
       "Olá, gostaria de agendar uma consulta na VA Dental Clinic.",
@@ -272,7 +291,7 @@ export default function App() {
       `E-mail: ${email}`,
       `Mensagem: ${contactMessage}`,
     ].join("\n");
-    window.open(`${WHATSAPP}&text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+    window.open(whatsappUrl(message), "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -283,14 +302,14 @@ export default function App() {
         <nav aria-label="Navegação principal">
           {nav.map(([label, id]) => <a href={`#${id}`} key={id} className={activeSection === id ? "is-active" : ""} aria-current={activeSection === id ? "location" : undefined}>{label}</a>)}
         </nav>
-        <a className="header-cta" href={`${WHATSAPP}&text=${encodeURIComponent("Olá, gostaria de agendar uma consulta na VA Dental Clinic.")}`} target="_blank" rel="noreferrer"><span>Agendar consulta</span><Arrow /></a>
+        <a className="header-cta" href={whatsappUrl(APPOINTMENT_MESSAGE)} target="_blank" rel="noopener noreferrer"><span>Agendar consulta</span><Arrow /></a>
         <button className="menu-toggle" type="button" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
       </header>
 
       <div className={`mobile-menu${menuOpen ? " is-open" : ""}`} aria-hidden={!menuOpen}>
         <Logo light />
         <nav>{nav.map(([label, id]) => <a href={`#${id}`} key={id} className={activeSection === id ? "is-active" : ""} onClick={() => setMenuOpen(false)}>{label}<Arrow /></a>)}</nav>
-        <a href={`${WHATSAPP}&text=${encodeURIComponent("Olá, gostaria de agendar uma consulta na VA Dental Clinic.")}`} target="_blank" rel="noreferrer">Agendar pelo WhatsApp</a>
+        <a href={whatsappUrl(APPOINTMENT_MESSAGE)} target="_blank" rel="noopener noreferrer">Agendar pelo WhatsApp</a>
       </div>
 
       <main id="conteudo">
@@ -301,7 +320,7 @@ export default function App() {
               <p className="eyebrow"><span>VA Dental Clinic</span><span>Saúde &amp; estética</span></p>
               <h1><span>Seja bem-vindo(a)</span><em>ao meu universo.</em></h1>
               <p className="hero-intro">Aqui, cada sorriso é cuidado com alma.</p>
-              <a className="hero-cta" href={`${WHATSAPP}&text=${encodeURIComponent("Olá, gostaria de agendar uma consulta na VA Dental Clinic.")}`} target="_blank" rel="noreferrer">Agendar pelo WhatsApp <Arrow /></a>
+              <a className="hero-cta" href={whatsappUrl(APPOINTMENT_MESSAGE)} target="_blank" rel="noopener noreferrer">Agendar pelo WhatsApp <Arrow /></a>
             </div>
             <div className="tooth-stage" aria-hidden="true"><div className="tooth-orbit" /><div className="tooth-object"><Tooth /></div></div>
             <div className="hero-index"><span>VA</span><i /><span>01</span></div>
@@ -309,16 +328,19 @@ export default function App() {
         </section>
 
         <section className="manifesto" id="clinica">
-          <p className="section-kicker">A clínica</p>
-          <div className="clinic-copy" data-reveal>
-            <h2>Seja bem-vindo à<br />VA Dental Clinic</h2>
-            <div><p>Onde excelência clínica, estética e acolhimento caminham lado a lado.</p><p>Sob o cuidado da Dra. Verônica Assis, cirurgiã-dentista com sólida formação clínica e olhar estético refinado, a VA Dental Clinic foi criada para oferecer mais do que tratamentos odontológicos: oferecemos experiências transformadoras.</p><p>A VA Dental Clinic é um espaço íntimo, onde você será acolhido com discrição e cuidado, em uma jornada odontológica leve e sofisticada.</p><a className="text-link" href="#especialidades">Conheça as especialidades <Arrow /></a></div>
+          <div className="clinic-shell">
+            <div className="clinic-heading" data-reveal>
+              <p className="section-kicker">A clínica</p>
+              <h2>Seja bem-vindo à<br />VA Dental Clinic</h2>
+              <p>Onde excelência clínica, estética e acolhimento caminham lado a lado.</p>
+            </div>
+            <PhotoCarousel images={clinicImages} className="clinic-carousel" label="Ambientes da VA Dental Clinic" />
+            <div className="clinic-body" data-reveal>
+              <p>Sob o cuidado da Dra. Verônica Assis, cirurgiã-dentista com sólida formação clínica e olhar estético refinado, a VA Dental Clinic foi criada para oferecer mais do que tratamentos odontológicos: oferecemos experiências transformadoras.</p>
+              <p>A VA Dental Clinic é um espaço íntimo, onde você será acolhido com discrição e cuidado, em uma jornada odontológica leve e sofisticada.</p>
+              <a className="text-link" href="#especialidades">Conheça as especialidades <Arrow /></a>
+            </div>
           </div>
-        </section>
-
-        <section className="clinic-gallery" aria-label="Ambientes da clínica">
-          <div className="gallery-lead" data-reveal><span>A clínica</span><h2>Conheça nossos<br /><em>ambientes</em></h2></div>
-          <PhotoCarousel images={clinicImages} className="clinic-carousel" label="Ambientes da VA Dental Clinic" />
         </section>
 
         <section className="doctor" id="dentista">
@@ -356,7 +378,7 @@ export default function App() {
 
         <section className="photo-transition" aria-label="Compromisso da VA Dental Clinic">
           <picture className="photo-transition-media" data-reveal><source type="image/webp" srcSet={`${asset("/assets/doctor/3-360.webp")} 360w, ${asset("/assets/doctor/3.webp")} 585w`} sizes="(max-width: 720px) 42vw, 500px" /><img src={asset("/assets/doctor/3.jpg")} alt="Dra. Verônica Assis na VA Dental Clinic" width="585" height="675" loading="lazy" /></picture>
-          <div data-reveal><p>Sorrisos têm o poder de transformar. Esse é o nosso compromisso com você.</p><a className="hero-cta" href={`${WHATSAPP}&text=${encodeURIComponent("Olá, gostaria de agendar uma consulta na VA Dental Clinic.")}`} target="_blank" rel="noreferrer">Agendar pelo WhatsApp <Arrow /></a></div>
+          <div data-reveal><p>Sorrisos têm o poder de transformar. Esse é o nosso compromisso com você.</p><a className="hero-cta" href={whatsappUrl(APPOINTMENT_MESSAGE)} target="_blank" rel="noopener noreferrer">Agendar pelo WhatsApp <Arrow /></a></div>
         </section>
 
         <section className="contact" id="contato">
@@ -369,19 +391,19 @@ export default function App() {
           </div>
           <form onSubmit={submitContact}>
             <label><span>Seu nome</span><input name="name" type="text" autoComplete="name" required placeholder="Como podemos chamar você?" /></label>
-            <div className="form-row"><label><span>WhatsApp com DDD</span><input name="phone" type="tel" autoComplete="tel" required minLength={10} pattern="[0-9() +\-]{10,}" placeholder="(11) 99999-9999" /></label><label><span>Seu e-mail</span><input name="email" type="email" autoComplete="email" required placeholder="voce@email.com" /></label></div>
+            <div className="form-row"><label><span>WhatsApp com DDD</span><input name="phone" type="tel" inputMode="tel" autoComplete="tel" required minLength={10} onInput={(event) => event.currentTarget.setCustomValidity("")} placeholder="(11) 99999-9999" /></label><label><span>Seu e-mail</span><input name="email" type="email" autoComplete="email" required placeholder="voce@email.com" /></label></div>
             <label><span>Mensagem</span><textarea name="message" rows={3} required minLength={3} placeholder="Como podemos ajudar?" /></label>
             <button type="submit"><span>Enviar pelo WhatsApp</span><Arrow /></button>
           </form>
         </section>
 
         <section className="locations">
-          <article><span>Clínica 01 · Bela Vista</span><h3>Rua Maestro Cardim, 1251<br />Sala 15 · São Paulo/SP</h3><a href="https://www.google.com/maps/search/?api=1&query=Rua+Maestro+Cardim+1251+Sao+Paulo" target="_blank" rel="noreferrer">Abrir no mapa <Arrow /></a></article>
-          <article><span>Clínica 02 · Bela Vista</span><h3>Rua Bom Pastor, 2100<br />Conjunto 305 · São Paulo/SP</h3><a href="https://www.google.com/maps/search/?api=1&query=Rua+Bom+Pastor+2100+Sao+Paulo" target="_blank" rel="noreferrer">Abrir no mapa <Arrow /></a></article>
+          <article><span>Clínica 01 · Bela Vista</span><h3>Rua Maestro Cardim, 1251<br />Sala 15 · São Paulo/SP</h3><a href="https://www.google.com/maps/search/?api=1&query=Rua%20Maestro%20Cardim%2C%201251%20-%20Sala%2015%2C%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%20-%20SP" target="_blank" rel="noopener noreferrer">Abrir no mapa <Arrow /></a></article>
+          <article><span>Clínica 02 · Bela Vista</span><h3>Rua Bom Pastor, 2100<br />Conjunto 305 · São Paulo/SP</h3><a href="https://www.google.com/maps/search/?api=1&query=Rua%20Bom%20Pastor%2C%202100%20-%20Conjunto%20305%2C%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%20-%20SP" target="_blank" rel="noopener noreferrer">Abrir no mapa <Arrow /></a></article>
         </section>
       </main>
 
-      <a className={`whatsapp-float${footerVisible ? " is-hidden" : ""}`} href={`${WHATSAPP}&text=${encodeURIComponent("Olá, gostaria de saber mais sobre a VA Dental Clinic.")}`} target="_blank" rel="noreferrer" aria-label="Falar com a VA Dental Clinic pelo WhatsApp" title="Falar pelo WhatsApp"><WhatsAppIcon /></a>
+      <a className={`whatsapp-float${footerVisible ? " is-hidden" : ""}`} href={whatsappUrl("Olá, gostaria de saber mais sobre a VA Dental Clinic.")} target="_blank" rel="noopener noreferrer" aria-label="Falar com a VA Dental Clinic pelo WhatsApp" title="Falar pelo WhatsApp"><WhatsAppIcon /></a>
 
       <footer ref={footerRef}>
         <Logo light />

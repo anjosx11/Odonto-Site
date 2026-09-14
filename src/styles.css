@@ -84,7 +84,6 @@ svg { width: 1.9rem; fill: none; stroke: currentColor; stroke-width: 1.25; }
 .manifesto-foot a svg, .text-link svg, .locations a svg { transition: transform .35s; }
 .manifesto-foot a:hover svg, .text-link:hover svg, .locations a:hover svg { transform: translateX(.4rem); }
 
-.clinic-gallery { padding: clamp(6rem, 10vw, 10rem) clamp(1.5rem, 5vw, 6rem) 12rem; background: #e8e5dc; }
 .gallery-lead { display: flex; justify-content: space-between; align-items: start; gap: 3rem; margin-bottom: 6rem; }
 .gallery-lead > span { margin-top: .8rem; color: var(--blue); font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; }
 .gallery-lead h2, .doctor h2, .specialties h2, .contact h2 { margin: 0; font: 400 clamp(3rem, 5.6vw, 6.5rem)/.98 "Italiana", serif; letter-spacing: -.04em; }
@@ -287,7 +286,6 @@ footer nav { display: flex; gap: 2rem; font-size: .67rem; text-transform: upperc
 .clinic-copy p:first-child { color: var(--navy); font-weight: 500; }
 .manifesto-foot { margin-top: clamp(3rem, 5vw, 5rem); }
 
-.clinic-gallery { padding: clamp(5rem, 8vw, 8rem) clamp(1.5rem, 6vw, 7rem); }
 .gallery-lead { align-items: end; margin-bottom: 3.5rem; }
 .gallery-lead h2 { font-size: clamp(2.8rem, 4.8vw, 5.5rem); }
 .clinic-carousel { height: min(68vw, 43rem); min-height: 30rem; background: var(--navy-deep); }
@@ -367,7 +365,6 @@ footer nav { display: flex; gap: 2rem; font-size: .67rem; text-transform: upperc
   .clinic-copy > div { font-size: .94rem; }
   .manifesto-foot { gap: 2rem; }
 
-  .clinic-gallery { padding-block: 5rem; }
   .gallery-lead { margin-bottom: 2.5rem; }
   .gallery-lead h2 { font-size: 3rem; }
   .clinic-carousel { height: 31rem; min-height: 0; margin: 0; }
@@ -508,12 +505,6 @@ footer nav { display: flex; gap: 2rem; font-size: .67rem; text-transform: upperc
   50% { transform: translate3d(0, -.55rem, 0) rotateY(20deg) rotateX(-2deg); }
 }
 
-.clinic-gallery {
-  display: grid;
-  grid-template-columns: minmax(17rem, .72fr) minmax(22rem, 1.28fr);
-  align-items: center;
-  gap: clamp(3rem, 8vw, 9rem);
-}
 .gallery-lead { display: block; margin: 0; }
 .gallery-lead > span { display: block; margin: 0 0 2rem; }
 .clinic-carousel {
@@ -556,7 +547,6 @@ footer nav { display: flex; gap: 2rem; font-size: .67rem; text-transform: upperc
   .hero-sticky { grid-template-columns: 46% 54%; }
   .hero-sticky::before { left: 46%; }
   .tooth-stage { left: calc(46% - 5rem); width: 4.8rem; }
-  .clinic-gallery { grid-template-columns: 1fr; }
   .gallery-lead { text-align: center; }
   .clinic-carousel { justify-self: center; }
   .doctor { grid-template-columns: 1fr; }
@@ -608,7 +598,6 @@ footer nav { display: flex; gap: 2rem; font-size: .67rem; text-transform: upperc
   }
   .hero .hero-carousel .carousel-controls { bottom: 1rem; }
 
-  .clinic-gallery { padding-inline: 1.25rem; gap: 2.5rem; }
   .gallery-lead { text-align: left; }
   .gallery-lead > span { margin-bottom: 1.2rem; }
   .clinic-carousel { width: 100%; height: auto; aspect-ratio: 585 / 675; }
@@ -644,7 +633,6 @@ footer nav { display: flex; gap: 2rem; font-size: .67rem; text-transform: upperc
 .mobile-menu nav a.is-active { color: #d9cfb8; }
 .wordmark { width: clamp(6.8rem, 8vw, 7.8rem); }
 .wordmark img { object-fit: contain; }
-.wordmark--light img { filter: brightness(0) invert(1); opacity: .9; }
 
 [data-reveal] { opacity: 1; transform: none; }
 .motion-enabled [data-reveal]:not(.is-visible) { opacity: .72; transform: translateY(1.15rem); }
@@ -667,7 +655,6 @@ footer nav { display: flex; gap: 2rem; font-size: .67rem; text-transform: upperc
 .clinic-copy h2 { font-size: clamp(2.55rem, 4vw, 4.4rem); }
 .clinic-copy > div { max-width: 39rem; }
 .clinic-copy .text-link { margin-top: .8rem; }
-.clinic-gallery { padding-block: clamp(4.75rem, 7vw, 7rem); }
 .gallery-lead h2 { font-size: clamp(2.65rem, 4vw, 4.4rem); }
 
 .doctor {
@@ -767,7 +754,7 @@ footer nav { display: flex; gap: 2rem; font-size: .67rem; text-transform: upperc
   .hero h1 { font-size: clamp(2.65rem, 11vw, 3.45rem); }
   .hero .tooth-stage { right: 1rem; bottom: .65rem; width: clamp(3.8rem, 17vw, 4.6rem); }
   .hero .hero-carousel .carousel-controls { left: 1rem; bottom: 1rem; }
-  .manifesto, .clinic-gallery, .specialties, .contact { padding-block: 4.5rem; }
+  .manifesto, .specialties, .contact { padding-block: 4.5rem; }
   .clinic-copy h2, .gallery-lead h2, .specialties h2, .contact-intro h2 { font-size: clamp(2.45rem, 10.5vw, 3.15rem); }
   .doctor-carousel { width: min(100%, 500px); justify-self: center; }
   .doctor-copy { padding-block: 4rem 4.75rem; }
@@ -791,4 +778,196 @@ footer nav { display: flex; gap: 2rem; font-size: .67rem; text-transform: upperc
 @media (prefers-reduced-motion: reduce) {
   .motion-enabled [data-reveal]:not(.is-visible) { opacity: 1; transform: none; }
   .hero-copy, .hero-carousel, .hero h1 span, .hero h1 em, .hero-intro, .hero-cta, .hero .tooth-object, .hero-carousel .carousel-controls, .carousel-images picture.is-current img { animation: none; }
+}
+
+/* Final layout consolidation */
+.site { --page-gutter: max(1.5rem, calc((100vw - 75rem) / 2)); }
+.header { padding-inline: var(--page-gutter); }
+.header,
+.is-scrolled .header { height: 4.5rem; }
+.is-scrolled .header { height: 4.25rem; }
+.wordmark { width: 7.5rem; }
+.wordmark img {
+  width: 7.5rem;
+  height: auto;
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+.wordmark--light {
+  padding: .3rem .45rem;
+  background: var(--ivory);
+}
+.wordmark--light img { opacity: 1; filter: none; }
+
+.hero {
+  min-height: 0;
+  padding-top: 4.5rem;
+  background: var(--paper);
+}
+.hero-sticky {
+  grid-template-columns: 40% 60%;
+  width: min(calc(100% - 3rem), 75rem);
+  height: clamp(38.75rem, calc(100svh - 4.5rem), 45rem);
+  min-height: 0;
+  margin-inline: auto;
+  background: var(--navy-deep);
+}
+.hero-sticky::before { display: none; }
+.hero-carousel {
+  align-self: stretch;
+  justify-self: stretch;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  box-shadow: none;
+}
+.hero-copy {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 4.5vw, 4.5rem);
+}
+.hero .tooth-stage { top: 1rem; left: calc(40% - 5.4rem); }
+.hero-index { left: clamp(2rem, 4vw, 4.5rem); width: calc(40% - clamp(4rem, 8vw, 9rem)); }
+
+.manifesto {
+  padding: clamp(5.5rem, 8vw, 7rem) var(--page-gutter);
+  background: #f4f1e9;
+}
+.manifesto::before { left: var(--page-gutter); right: var(--page-gutter); }
+.clinic-shell {
+  display: grid;
+  grid-template-columns: minmax(20rem, 36.5rem) minmax(18rem, 1fr);
+  grid-template-areas: "carousel heading" "carousel body";
+  align-items: center;
+  column-gap: clamp(3.5rem, 6vw, 5.5rem);
+  row-gap: 1.25rem;
+  width: min(100%, 75rem);
+  margin-inline: auto;
+}
+.clinic-heading { grid-area: heading; align-self: end; }
+.clinic-heading h2 {
+  margin: 0 0 1.5rem;
+  color: var(--navy);
+  font: 400 clamp(2.7rem, 4vw, 4.35rem)/1.02 "Italiana", serif;
+  letter-spacing: -.04em;
+}
+.clinic-heading > p:last-child,
+.clinic-body { color: #34435a; font-size: .98rem; line-height: 1.72; }
+.clinic-heading > p:last-child { margin: 0; font-weight: 500; }
+.clinic-body { grid-area: body; align-self: start; }
+.clinic-body p { margin: 0 0 1.1rem; }
+.clinic-body .text-link { margin-top: .65rem; }
+.clinic-carousel {
+  grid-area: carousel;
+  justify-self: start;
+  width: min(100%, 36.5rem);
+  max-height: 40.5rem;
+}
+
+.doctor {
+  width: min(100%, 75rem);
+  padding: clamp(5.5rem, 8vw, 7rem) 0;
+  gap: clamp(3.5rem, 6vw, 5.5rem);
+}
+.doctor-copy h2 { margin-top: 0; }
+.doctor-text { margin-block: 1.7rem 2.1rem; gap: .8rem; }
+.doctor-text p { line-height: 1.6; }
+
+.specialties,
+.contact { padding-inline: var(--page-gutter); }
+.specialties > *,
+.contact > * { min-width: 0; }
+.specialties-heading,
+.specialty-panels,
+.specialties-note { width: min(100%, 75rem); margin-inline: auto; }
+.specialty-panels button,
+.specialty-panels button.is-active { min-height: 9.5rem; padding: 1.35rem; }
+.specialty-content p { margin-top: .75rem; line-height: 1.5; }
+.specialties-note { margin-top: 2rem; }
+
+.contact {
+  grid-template-columns: minmax(18rem, .85fr) minmax(25rem, 1.15fr);
+  gap: clamp(3.5rem, 7vw, 6.5rem);
+  padding-block: clamp(5.5rem, 8vw, 7rem);
+}
+.contact-intro,
+.contact form { width: 100%; max-width: 35rem; }
+.contact-intro { justify-self: end; }
+.contact form { justify-self: start; }
+.contact-intro > p { margin-bottom: 1.8rem; }
+.contact label { padding: 1rem 0; }
+.contact button { margin-top: 2rem; padding: 1.25rem 1.5rem; }
+
+.locations { padding-inline: var(--page-gutter); }
+.locations article { min-height: 19rem; padding: clamp(2.5rem, 4vw, 3.75rem); }
+.locations h3 { margin: 2.5rem 0; font-size: clamp(1.75rem, 2.5vw, 2.65rem); }
+footer { padding: 4.5rem var(--page-gutter) 2rem; }
+footer > .wordmark { width: 9.5rem; }
+footer > .wordmark img { width: 9.5rem; }
+footer > div:nth-child(2) { margin-top: 3.5rem; padding-bottom: 3rem; }
+
+@media (max-width: 900px) {
+  .clinic-shell { grid-template-columns: minmax(18rem, 1fr) minmax(18rem, 1fr); column-gap: 3rem; }
+  .doctor { width: min(calc(100% - 3rem), 43rem); }
+}
+
+@media (max-width: 720px) {
+  .site { --page-gutter: 1.25rem; }
+  .header,
+  .is-scrolled .header { height: 4rem; }
+  .wordmark,
+  .wordmark img { width: 6.75rem; }
+  .mobile-menu { padding: 5.75rem 1.25rem 1.5rem; }
+  .mobile-menu > .wordmark--light { width: 7.75rem; }
+  .mobile-menu > .wordmark--light img { width: 6.85rem; }
+  #inicio, #clinica, #dentista, #especialidades, #contato { scroll-margin-top: 4.35rem; }
+
+  .hero { min-height: 0; padding-top: 4rem; }
+  .hero-sticky {
+    grid-template: minmax(20rem, 46svh) auto / 1fr;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+  }
+  .hero-carousel { grid-row: 1; }
+  .hero-copy { grid-row: 2; min-height: 18.5rem; padding: 2.1rem 1.25rem 2.75rem; }
+  .hero .eyebrow { margin-bottom: 1.15rem; }
+  .hero h1 { font-size: clamp(2.55rem, 11vw, 3.4rem); }
+  .hero-intro { margin-top: .9rem; }
+  .hero-cta { margin-top: 1.1rem; }
+  .hero .tooth-stage { right: .9rem; bottom: .55rem; }
+
+  .manifesto { padding-block: 4rem; }
+  .clinic-shell {
+    grid-template: "heading" auto "carousel" auto "body" auto / 1fr;
+    gap: 1.75rem;
+  }
+  .clinic-heading h2 { margin-bottom: 1.1rem; font-size: clamp(2.45rem, 10.5vw, 3.15rem); }
+  .clinic-carousel { width: 100%; max-height: none; }
+  .clinic-body p { margin-bottom: 1rem; }
+
+  .doctor { width: 100%; padding: 0; gap: 0; }
+  .doctor-copy { padding: 3.75rem 1.25rem 4.25rem; }
+  .doctor-text { margin-block: 1.5rem 2rem; }
+
+  .specialties,
+  .contact { padding-block: 4rem; }
+  .specialties-heading { margin-bottom: 2.25rem; }
+  .specialty-panels button,
+  .specialty-panels button.is-active { padding: 1.1rem .9rem; }
+  .contact { grid-template-columns: 1fr; gap: 2.75rem; }
+  .contact-intro,
+  .contact form { justify-self: stretch; max-width: none; }
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+
+  .locations { grid-template-columns: 1fr; padding-inline: 0; }
+  .locations article { min-height: 0; padding: 3rem 1.25rem; }
+  .locations h3 { margin: 2rem 0; }
+  footer { padding: 3.75rem 1.25rem 1.5rem; }
+  footer > .wordmark { width: 8.5rem; }
+  footer > .wordmark img { width: 8.5rem; }
+  footer > div:nth-child(2) { margin-top: 2.75rem; padding-bottom: 2.5rem; }
 }
