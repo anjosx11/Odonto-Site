@@ -20,13 +20,6 @@ const specialties = [
   { title: "Ortodontia", text: "Correção do posicionamento dos dentes, melhorando estética, função e saúde bucal." },
 ];
 
-const journey = [
-  { number: "01", title: "Primeiro contato e escuta", text: "Uma conversa atenta para compreender você e suas necessidades." },
-  { number: "02", title: "Avaliação e planejamento", text: "Cada detalhe é considerado para construir um cuidado coerente, seguro e personalizado." },
-  { number: "03", title: "Tratamento personalizado", text: "A condução acontece com clareza, delicadeza e respeito à sua individualidade." },
-  { number: "04", title: "Acompanhamento", text: "O cuidado continua com atenção próxima à saúde, ao conforto e ao bem-estar." },
-];
-
 const heroImages = [
   { src: "/assets/hero/1b.jpg", webp: "/assets/hero/1b.webp", smallWebp: "/assets/hero/1b-360.webp", alt: "Dra. Verônica Assis sorrindo na VA Dental Clinic", width: 537, height: 659, desktopPosition: "50% 42%", mobilePosition: "50% 34%" },
   { src: "/assets/hero/2b.jpg", webp: "/assets/hero/2b.webp", smallWebp: "/assets/hero/2b-360.webp", alt: "Sala de espera da VA Dental Clinic", width: 537, height: 659, desktopPosition: "50% 50%", mobilePosition: "50% 46%" },
@@ -172,15 +165,19 @@ function Tooth() {
 function Logo({ light = false }: { light?: boolean }) {
   return (
     <span className={`wordmark${light ? " wordmark--light" : ""}`}>
-      <img src={asset("/assets/logo.jpg")} alt="VA Dental Clinic — Odontologia" />
+      <img src={asset("/assets/logo-transparent.png")} alt="VA Dental Clinic — Odontologia" width="400" height="227" />
     </span>
   );
+}
+
+function WhatsAppIcon() {
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" /></svg>;
 }
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [specialty, setSpecialty] = useState(0);
-  const [journeyStep, setJourneyStep] = useState(0);
+  const [activeSection, setActiveSection] = useState("inicio");
   const [footerVisible, setFooterVisible] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLElement>(null);
@@ -191,17 +188,32 @@ export default function App() {
   }, [menuOpen]);
 
   useEffect(() => {
-    const footer = footerRef.current;
-    if (!footer) return;
-    const observer = new IntersectionObserver(([entry]) => setFooterVisible(entry.isIntersecting), { rootMargin: "80px 0px" });
-    observer.observe(footer);
+    const blockers = [document.querySelector(".photo-transition"), document.querySelector(".contact"), footerRef.current].filter((element): element is Element => Boolean(element));
+    const visible = new Set<Element>();
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => entry.isIntersecting ? visible.add(entry.target) : visible.delete(entry.target));
+      setFooterVisible(visible.size > 0);
+    }, { rootMargin: "64px 0px" });
+    blockers.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
     if (!window.location.hash) return;
     const targetId = decodeURIComponent(window.location.hash.slice(1));
-    requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView());
+    const target = document.getElementById(targetId);
+    target?.querySelectorAll("[data-reveal]").forEach((element) => element.classList.add("is-visible"));
+    requestAnimationFrame(() => target?.scrollIntoView({ block: "start" }));
+  }, []);
+
+  useEffect(() => {
+    const sections = ["inicio", ...nav.map(([, id]) => id)].map((id) => document.getElementById(id)).filter((section): section is HTMLElement => Boolean(section));
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible?.target.id) setActiveSection(visible.target.id);
+    }, { rootMargin: "-28% 0px -58%", threshold: [0, .1, .35] });
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -212,7 +224,12 @@ export default function App() {
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible"));
     }, { threshold: 0.14 });
-    root.querySelectorAll("[data-reveal]").forEach((element) => revealObserver.observe(element));
+    root.querySelectorAll("[data-reveal]").forEach((element) => {
+      const rect = element.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) element.classList.add("is-visible");
+      revealObserver.observe(element);
+    });
+    root.classList.add("motion-enabled");
 
     let frame = 0;
     const update = () => {
@@ -225,16 +242,6 @@ export default function App() {
       root.style.setProperty("--hero", reduceMotion ? "1" : String(hero));
       root.style.setProperty("--story", String(storyProgress));
       root.classList.toggle("is-scrolled", scrollY > 48);
-      const footer = footerRef.current;
-      if (footer) setFooterVisible(footer.getBoundingClientRect().top < window.innerHeight + 80);
-
-      const journeyElement = document.querySelector<HTMLElement>(".journey");
-      if (journeyElement) {
-        const rect = journeyElement.getBoundingClientRect();
-        const progress = Math.min(1, Math.max(0, (window.innerHeight * .62 - rect.top) / Math.max(rect.height - window.innerHeight * .45, 1)));
-        root.style.setProperty("--journey", String(progress));
-        setJourneyStep(Math.min(journey.length - 1, Math.floor(progress * journey.length)));
-      }
     };
     const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
     update();
@@ -272,9 +279,9 @@ export default function App() {
     <div className="site" ref={rootRef}>
       <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
       <header className="header">
-        <a href="#inicio" className="brand" aria-label="VA Dental Clinic — início"><Logo light /></a>
+        <a href="#inicio" className="brand" aria-label="VA Dental Clinic — início"><Logo /></a>
         <nav aria-label="Navegação principal">
-          {nav.map(([label, id]) => <a href={`#${id}`} key={id}>{label}</a>)}
+          {nav.map(([label, id]) => <a href={`#${id}`} key={id} className={activeSection === id ? "is-active" : ""} aria-current={activeSection === id ? "location" : undefined}>{label}</a>)}
         </nav>
         <a className="header-cta" href={`${WHATSAPP}&text=${encodeURIComponent("Olá, gostaria de agendar uma consulta na VA Dental Clinic.")}`} target="_blank" rel="noreferrer"><span>Agendar consulta</span><Arrow /></a>
         <button className="menu-toggle" type="button" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
@@ -282,7 +289,7 @@ export default function App() {
 
       <div className={`mobile-menu${menuOpen ? " is-open" : ""}`} aria-hidden={!menuOpen}>
         <Logo light />
-        <nav>{nav.map(([label, id], index) => <a href={`#${id}`} key={id} onClick={() => setMenuOpen(false)}><small>0{index + 1}</small>{label}<Arrow /></a>)}</nav>
+        <nav>{nav.map(([label, id]) => <a href={`#${id}`} key={id} className={activeSection === id ? "is-active" : ""} onClick={() => setMenuOpen(false)}>{label}<Arrow /></a>)}</nav>
         <a href={`${WHATSAPP}&text=${encodeURIComponent("Olá, gostaria de agendar uma consulta na VA Dental Clinic.")}`} target="_blank" rel="noreferrer">Agendar pelo WhatsApp</a>
       </div>
 
@@ -302,12 +309,11 @@ export default function App() {
         </section>
 
         <section className="manifesto" id="clinica">
-          <div className="section-label"><span>01</span><p>A VA Dental</p></div>
+          <p className="section-kicker">A clínica</p>
           <div className="clinic-copy" data-reveal>
             <h2>Seja bem-vindo à<br />VA Dental Clinic</h2>
-            <div><p>Onde excelência clínica, estética e acolhimento caminham lado a lado.</p><p>Sob o cuidado da Dra. Verônica Assis, cirurgiã-dentista com sólida formação clínica e olhar estético refinado, a VA Dental Clinic foi criada para oferecer mais do que tratamentos odontológicos: oferecemos experiências transformadoras.</p><p>A VA Dental Clinic é um espaço íntimo, onde você será acolhido com discrição e cuidado, em uma jornada odontológica leve e sofisticada.</p></div>
+            <div><p>Onde excelência clínica, estética e acolhimento caminham lado a lado.</p><p>Sob o cuidado da Dra. Verônica Assis, cirurgiã-dentista com sólida formação clínica e olhar estético refinado, a VA Dental Clinic foi criada para oferecer mais do que tratamentos odontológicos: oferecemos experiências transformadoras.</p><p>A VA Dental Clinic é um espaço íntimo, onde você será acolhido com discrição e cuidado, em uma jornada odontológica leve e sofisticada.</p><a className="text-link" href="#especialidades">Conheça as especialidades <Arrow /></a></div>
           </div>
-          <div className="manifesto-foot" data-reveal><p>Sorrisos têm o poder de transformar. Esse é o nosso compromisso com você.</p><a href="#especialidades">Conheça as especialidades <Arrow /></a></div>
         </section>
 
         <section className="clinic-gallery" aria-label="Ambientes da clínica">
@@ -318,7 +324,7 @@ export default function App() {
         <section className="doctor" id="dentista">
           <PhotoCarousel images={doctorImages} className="doctor-carousel" label="Fotografias da Dra. Verônica Assis" />
           <div className="doctor-copy">
-            <div className="section-label"><span>02</span><p>Quem sou eu?</p></div>
+            <p className="section-kicker">Quem sou eu?</p>
             <h2 data-reveal>Dra. Verônica Assis</h2>
             <div className="doctor-text" data-reveal>
               <p>Sou a Dra. Verônica Assis, dentista apaixonada pela arte de cuidar de sorrisos e de pessoas.</p>
@@ -333,8 +339,8 @@ export default function App() {
 
         <section className="specialties" id="especialidades">
           <div className="specialties-heading">
-            <div className="section-label"><span>03</span><p>Especialidades</p></div>
-            <h2 data-reveal>Nossas<br /><em>Especialidades</em></h2>
+            <p className="section-kicker">Tratamentos</p>
+            <h2 data-reveal>Nossas especialidades</h2>
           </div>
           <div className="specialty-panels" onMouseLeave={() => setSpecialty(0)}>
             {specialties.map((item, index) => (
@@ -348,28 +354,15 @@ export default function App() {
           <div className="specialties-note"><span>Odontologia personalizada</span><p>Cada plano parte de uma avaliação individual. Indicações e possibilidades são definidas em consulta.</p></div>
         </section>
 
-        <section className="journey" id="jornada">
-          <div className="journey-sticky">
-            <div className="journey-heading">
-              <div className="section-label"><span>04</span><p>Sua jornada</p></div>
-              <h2>Como funciona<br />o <em>atendimento</em></h2>
-              <div className="journey-photo"><picture><source type="image/webp" srcSet={`${asset("/assets/hero/molde2-360.webp")} 360w, ${asset("/assets/hero/molde2.webp")} 1479w`} sizes="(max-width: 720px) calc(100vw - 3rem), 48vw" /><img src={asset("/assets/hero/molde2.jpg")} alt="Consultórios e recepção da VA Dental Clinic" width="1479" height="661" loading="lazy" onError={(event) => { event.currentTarget.hidden = true; event.currentTarget.closest(".journey-photo")?.classList.add("has-image-error"); }} /></picture></div>
-            </div>
-            <div className="journey-steps">
-              <div className="journey-line"><i /></div>
-              {journey.map((step, index) => (
-                <article key={step.number} className={index <= journeyStep ? "is-active" : ""}>
-                  <span>{step.number}</span><div><h3>{step.title}</h3><p>{step.text}</p></div>
-                </article>
-              ))}
-            </div>
-          </div>
+        <section className="photo-transition" aria-label="Compromisso da VA Dental Clinic">
+          <picture className="photo-transition-media" data-reveal><source type="image/webp" srcSet={`${asset("/assets/doctor/3-360.webp")} 360w, ${asset("/assets/doctor/3.webp")} 585w`} sizes="(max-width: 720px) 42vw, 500px" /><img src={asset("/assets/doctor/3.jpg")} alt="Dra. Verônica Assis na VA Dental Clinic" width="585" height="675" loading="lazy" /></picture>
+          <div data-reveal><p>Sorrisos têm o poder de transformar. Esse é o nosso compromisso com você.</p><a className="hero-cta" href={`${WHATSAPP}&text=${encodeURIComponent("Olá, gostaria de agendar uma consulta na VA Dental Clinic.")}`} target="_blank" rel="noreferrer">Agendar pelo WhatsApp <Arrow /></a></div>
         </section>
 
         <section className="contact" id="contato">
           <div className="contact-intro">
-            <div className="section-label"><span>05</span><p>Entre em contato</p></div>
-            <h2 data-reveal>Agende sua<br /><em>consulta</em></h2>
+            <p className="section-kicker">Entre em contato</p>
+            <h2 data-reveal>Agende sua consulta</h2>
             <p>Preencha seus dados para iniciar o atendimento diretamente pelo WhatsApp.</p>
             <a href="tel:+5511968825299">(11) 96882-5299</a>
             <a href="mailto:contato@vadentalclinic.com.br">contato@vadentalclinic.com.br</a>
@@ -388,7 +381,7 @@ export default function App() {
         </section>
       </main>
 
-      <a className={`whatsapp-pill${footerVisible ? " is-hidden" : ""}`} href={`${WHATSAPP}&text=${encodeURIComponent("Olá, gostaria de saber mais sobre a VA Dental Clinic.")}`} target="_blank" rel="noreferrer" aria-label="Falar com a VA Dental Clinic pelo WhatsApp"><span>Falar pelo WhatsApp</span><i>↗</i></a>
+      <a className={`whatsapp-float${footerVisible ? " is-hidden" : ""}`} href={`${WHATSAPP}&text=${encodeURIComponent("Olá, gostaria de saber mais sobre a VA Dental Clinic.")}`} target="_blank" rel="noreferrer" aria-label="Falar com a VA Dental Clinic pelo WhatsApp" title="Falar pelo WhatsApp"><WhatsAppIcon /></a>
 
       <footer ref={footerRef}>
         <Logo light />
